@@ -4,6 +4,7 @@ var content = document.querySelector(".getcontent");
 var editorContent = document.querySelector(".editor");
 var suggArr=[];
 var suggectionobj;
+var selectedtext;
 
 btn.addEventListener("click", function() {
   var s = editorContent.innerHTML;
@@ -51,3 +52,16 @@ function getsuggestions(){
         }
     })
 }
+
+function select(){
+    var selectedvalue = document.getElementById('select').value;
+    $('#myModal').modal('hide');
+    selectedtext = selectedvalue;
+    insertText();
+}
+function insertText(){
+    document.execCommand('insertText',false,selectedtext)    
+}
+$('#keyword').change(function () {
+    $('#lookupbtn').prop("disabled", !this.checked);
+}).change()
