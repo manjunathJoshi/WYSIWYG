@@ -87,8 +87,6 @@ html{
       box-shadow: 0 .1rem .1rem black;
 }
 
-
-
 img{
     width: 60px;
     height: 60px;
@@ -98,5 +96,8 @@ img{
 label {
     margin-left: 0.04rem;
     padding-left:.7rem
+}
+.div-inline{
+    margin-top: 27px;
 }
 

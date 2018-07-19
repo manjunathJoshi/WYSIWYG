@@ -5,6 +5,7 @@ var editorContent = document.querySelector(".editor");
 var suggArr=[];
 var suggectionobj;
 var selectedtext;
+var lookupstring;
 
 btn.addEventListener("click", function() {
   var s = editorContent.innerHTML;
@@ -22,9 +23,9 @@ function copy() {
   document.execCommand("copy", false, "");
 }
 
-function getsuggestions(){
-    var sugg = document.getElementById('keyword').value;
-    fetch ("https://api.datamuse.com/sug?s="+sugg)
+function getsuggestions(lookupstring){
+    // var sugg = document.getElementById('keyword').value;
+    fetch ("https://api.datamuse.com/sug?s="+lookupstring)
     .then(function(response) {
 
         return response.json();
@@ -50,18 +51,18 @@ function getsuggestions(){
                 select.insertBefore(option, select.lastChild);            
             }
         }
-    })
+    });
 }
 
 function select(){
     var selectedvalue = document.getElementById('select').value;
-    $('#myModal').modal('hide');
-    selectedtext = selectedvalue;
-    insertText();
+    document.execCommand('insertText',false,selectedvalue);
+    var myNode = document.getElementById("select");
+    myNode.innerHTML = '';
 }
-function insertText(){
-    document.execCommand('insertText',false,selectedtext)    
+
+function lookup(){
+    var lookup = prompt("Please enter the lookup word");
+    lookupstring = lookup;
+    getsuggestions(lookupstring);
 }
-$('#keyword').change(function () {
-    $('#lookupbtn').prop("disabled", !this.checked);
-}).change()
